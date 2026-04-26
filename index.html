@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - 5StepAds</title>
+    <link rel="stylesheet" href="tailwind css/output.css">
+    <script>
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script src="js/lib-loader.js" defer></script>
+    <script src="js/calculate.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50">
+    <!-- Top Navigation -->
+    <nav class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-lg">📈</div>
+                        <h1 class="text-xl font-bold tracking-tight">5StepAds</h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 transition">Dashboard</a>
+                    <a href="menu/invoice.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Invoice</a>
+                    <a href="menu/admin.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Admin</a>
+                    <button id="darkModeToggle" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.2A8.5 8.5 0 118.8 4a6.8 6.8 0 0011.2 11.2z"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="darkModeToggleMobile" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition mr-2">
+                        <svg id="darkModeIconMobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.2A8.5 8.5 0 118.8 4a6.8 6.8 0 0011.2 11.2z"></path></svg>
+                    </button>
+                    <button id="mobileMenuButton" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 transition">Dashboard</a>
+                    <a href="menu/invoice.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Invoice</a>
+                    <a href="menu/admin.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Admin</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Dashboard Overview</h1>
+            <p class="text-slate-600 dark:text-slate-400">Monitor your automation operations and performance metrics</p>
+        </div>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto">
+                <div class="p-8 space-y-8">
+                    <!-- Hero Section -->
+                    <section class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-lg">
+                        <h1 class="text-4xl font-bold mb-2">Automation that scales</h1>
+                        <p class="text-blue-100 mb-6 max-w-lg">Monitor automation projects, workflow performance, and service delivery from one clean dashboard.</p>
+                        <div class="flex gap-4">
+                            <a href="menu/invoice.html" class="px-6 py-2 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition">Open Invoice Desk</a>
+                            <a href="menu/training.html" class="px-6 py-2 border border-blue-200 text-white rounded-lg font-medium hover:bg-blue-600 transition">View Training</a>
+                        </div>
+                    </section>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-4 gap-6">
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Automation Projects</p>
+                            <p class="text-3xl font-bold mb-2">2,560</p>
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">+12.4% vs last month</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Active Workflows</p>
+                            <p class="text-3xl font-bold mb-2">348</p>
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">+24% MoM growth</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Monthly Revenue</p>
+                            <p class="text-3xl font-bold mb-2">RM 18,920</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Steady cycle</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Active Operators</p>
+                            <p class="text-3xl font-bold mb-2">12</p>
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">All online</p>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <h3 class="text-lg font-bold mb-6">Workflow Funnel</h3>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Channel performance over the last 6 months</p>
+                            <div class="h-48 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                                <canvas id="funnelChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <h3 class="text-lg font-bold mb-6">Integration Sources</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">n8n</span>
+                                    <span class="font-bold">RM 3,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Zapier</span>
+                                    <span class="font-bold">RM 2,500</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Make.com</span>
+                                    <span class="font-bold">RM 1,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium">Custom</span>
+                                    <span class="font-bold">RM 500</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Grid -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <h3 class="text-lg font-bold mb-6">Project Tracking</h3>
+                            <div class="space-y-4 mb-6">
+                                <div class="flex gap-4">
+                                    <div class="flex-1 bg-emerald-50 dark:bg-emerald-950 rounded-lg p-4">
+                                        <p class="text-xs text-slate-600 dark:text-slate-400 mb-1">Completed</p>
+                                        <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">2,847</p>
+                                    </div>
+                                    <div class="flex-1 bg-red-50 dark:bg-red-950 rounded-lg p-4">
+                                        <p class="text-xs text-slate-600 dark:text-slate-400 mb-1">Failed</p>
+                                        <p class="text-2xl font-bold text-red-600 dark:text-red-400">24</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-32 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                                <canvas id="leadsChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                            <h3 class="text-lg font-bold mb-6">Team Performance</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-4 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-1">Successful Runs</p>
+                                    <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">2,847</p>
+                                </div>
+                                <div class="p-4 bg-red-50 dark:bg-red-950 rounded-lg">
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-1">Failed Runs</p>
+                                    <p class="text-2xl font-bold text-red-600 dark:text-red-400">24</p>
+                                </div>
+                                <div class="p-4 bg-purple-50 dark:bg-purple-950 rounded-lg">
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-1">Avg Execution</p>
+                                    <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">1.2s</p>
+                                </div>
+                                <div class="p-4 bg-emerald-50 dark:bg-emerald-950 rounded-lg">
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-1">Uptime</p>
+                                    <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">99.8%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    <script>
+        // Dark mode toggle for desktop
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+            });
+        }
+
+        // Dark mode toggle for mobile
+        const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+        if (darkModeToggleMobile) {
+            darkModeToggleMobile.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator - 5StepAds</title>
+    <link rel="stylesheet" href="../tailwind css/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script src="../config/env.js" defer></script>
+    <script src="../js/dashboard.js" defer></script>
+    <script src="../js/invoice.js" defer></script>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50">
+    <!-- Top Navigation -->
+    <nav class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-lg">📄</div>
+                        <h1 class="text-xl font-bold tracking-tight">5StepAds</h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="../index.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Dashboard</a>
+                    <a href="invoice.html" class="px-3 py-2 rounded-md text-sm font-medium bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 transition">Invoice</a>
+                    <a href="admin.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Admin</a>
+                    <button id="darkModeToggle" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition">
+                        <svg id="darkModeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.2A8.5 8.5 0 118.8 4a6.8 6.8 0 0011.2 11.2z"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="darkModeToggleMobile" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition mr-2">
+                        <svg id="darkModeIconMobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.2A8.5 8.5 0 118.8 4a6.8 6.8 0 0011.2 11.2z"></path></svg>
+                    </button>
+                    <button id="mobileMenuButton" class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="../index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Dashboard</a>
+                    <a href="invoice.html" class="block px-3 py-2 rounded-md text-base font-medium bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 transition">Invoice</a>
+                    <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Training</a>
+                    <a href="admin.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Admin</a>
+                    <a href="pricing.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Pricing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Invoice Generator</h1>
+            <p class="text-slate-600 dark:text-slate-400">Create professional invoices with ease</p>
+        </div>
+
+                    <!-- Form Grid -->
+                    <div class="grid grid-cols-3 gap-8">
+                        <!-- Form Section -->
+                        <div class="col-span-2">
+                            <form id="invoiceForm" class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 space-y-8">
+                                <!-- Invoice Meta -->
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">Invoice Details</h3>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Invoice Number</label>
+                                            <input type="text" id="invoiceNumber" placeholder="INV-001" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Invoice Date</label>
+                                            <input type="date" id="invoiceDate" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Due Date</label>
+                                            <input type="date" id="dueDate" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Company Details -->
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">From (Company)</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Company Name</label>
+                                            <input type="text" id="companyName" placeholder="Your Company" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Street Address</label>
+                                            <input type="text" id="companyStreet" placeholder="123 Business St" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">City / State</label>
+                                            <input type="text" id="companyCity" placeholder="Kuala Lumpur" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Client Details -->
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">Bill To (Client)</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Client Name</label>
+                                            <input type="text" id="clientName" placeholder="Client Name" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Street Address</label>
+                                            <input type="text" id="clientStreet" placeholder="456 Client Ave" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">City / State</label>
+                                            <input type="text" id="clientCity" placeholder="Selangor" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Line Items -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h3 class="text-lg font-bold">Line Items</h3>
+                                        <button type="button" onclick="addItem()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium text-sm">+ Add Item</button>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full">
+                                            <thead>
+                                                <tr class="border-b border-slate-300 dark:border-slate-700">
+                                                    <th class="text-left py-3 px-4 font-medium text-sm">Description</th>
+                                                    <th class="text-center py-3 px-4 font-medium text-sm">Qty</th>
+                                                    <th class="text-right py-3 px-4 font-medium text-sm">Price</th>
+                                                    <th class="text-right py-3 px-4 font-medium text-sm">Amount</th>
+                                                    <th class="text-center py-3 px-4 font-medium text-sm">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="itemsTable">
+                                                <tr class="item-row border-b border-slate-200 dark:border-slate-700">
+                                                    <td class="py-3 px-4"><input type="text" class="item-description w-full px-3 py-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Product/Service" required></td>
+                                                    <td class="py-3 px-4"><input type="number" class="item-quantity w-full px-3 py-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" value="1" min="1" step="1" oninput="calculateInvoice()" required></td>
+                                                    <td class="py-3 px-4"><input type="number" class="item-price w-full px-3 py-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" value="0.00" min="0" step="0.01" oninput="calculateInvoice()" required></td>
+                                                    <td class="py-3 px-4"><input type="text" class="item-amount w-full px-3 py-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800" value="0.00" readonly></td>
+                                                    <td class="py-3 px-4 text-center"><button type="button" class="text-red-600 hover:text-red-700" onclick="removeItem(this)">Remove</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Totals -->
+                                <div class="space-y-3 border-t border-slate-200 dark:border-slate-700 pt-6">
+                                    <div class="flex justify-between">
+                                        <span>Subtotal</span>
+                                        <span id="subtotal" class="font-bold">RM 0.00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <label for="taxRate" class="text-sm">Tax Rate (%)</label>
+                                        <div class="flex gap-4 items-center">
+                                            <input type="number" id="taxRate" value="0" min="0" step="0.01" oninput="calculateInvoice()" class="w-24 px-3 py-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800">
+                                            <span id="taxAmount" class="font-bold">RM 0.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-lg font-bold bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
+                                        <span>Total Amount</span>
+                                        <span id="total">RM 0.00</span>
+                                    </div>
+                                </div>
+
+                                <!-- Notes -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Notes & Terms</label>
+                                    <textarea id="notes" rows="4" placeholder="Add payment terms, special notes, or thank you message" class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-4 pt-6">
+                                    <button type="button" onclick="document.getElementById('invoiceForm').reset(); document.getElementById('invoiceContent').style.display='none'; document.getElementById('placeholderPreview').style.display='flex'; document.getElementById('downloadPdfBtn').style.display='none';" class="flex-1 px-6 py-3 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition font-medium">Clear Form</button>
+                                    <button type="submit" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">Preview & Submit</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Preview Section -->
+                        <div class="col-span-1">
+                            <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 sticky top-24 max-h-[calc(100vh-150px)] overflow-y-auto">
+                                <h3 class="text-lg font-bold mb-4">Live Preview</h3>
+                                <div id="placeholderPreview" class="flex flex-col items-center justify-center py-12">
+                                    <svg class="w-12 h-12 text-slate-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    <p class="text-sm text-slate-500 text-center">Fill in the form to see a preview</p>
+                                </div>
+                                <div id="invoiceContent" style="display:none;"></div>
+                                <button type="button" id="downloadPdfBtn" style="display:none;" onclick="downloadPdf()" class="w-full mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium text-sm">Download PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Dark mode toggle for desktop
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+            });
+        }
+
+        // Dark mode toggle for mobile
+        const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+        if (darkModeToggleMobile) {
+            darkModeToggleMobile.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        function refreshPage() { location.reload(); }
+        function addItem() { const row = document.querySelector('.item-row').cloneNode(true); document.getElementById('itemsTable').appendChild(row); }
+        function removeItem(btn) { btn.closest('.item-row').remove(); calculateInvoice(); }
+        function calculateInvoice() {
+            let subtotal = 0;
+            document.querySelectorAll('.item-row').forEach(row => {
+                const qty = parseFloat(row.querySelector('.item-quantity').value) || 0;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                const amount = qty * price;
+                row.querySelector('.item-amount').value = amount.toFixed(2);
+                subtotal += amount;
+            });
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            const taxAmount = subtotal * (taxRate / 100);
+            const total = subtotal + taxAmount;
+            document.getElementById('subtotal').textContent = 'RM ' + subtotal.toFixed(2);
+            document.getElementById('taxAmount').textContent = 'RM ' + taxAmount.toFixed(2);
+            document.getElementById('total').textContent = 'RM ' + total.toFixed(2);
+        }
+        function downloadPdf() { alert('PDF export functionality would be implemented here'); }
+
+        document.getElementById('invoiceForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('placeholderPreview').style.display = 'none';
+            document.getElementById('invoiceContent').style.display = 'block';
+            document.getElementById('downloadPdfBtn').style.display = 'block';
+            calculateInvoice();
+        });
+    </script>
+</body>
+</html>

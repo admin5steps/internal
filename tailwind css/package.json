@@ -1,0 +1,16 @@
+{
+  "name": "5stepads",
+  "version": "1.0.0",
+  "description": "**Modern, lightweight dashboard for automation services business.** \r Monitor automation projects, manage invoicing, train teams, and integrate n8n/Zapier workflows from one unified workspace.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
